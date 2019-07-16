@@ -1,4 +1,5 @@
 class PortfoliosController < ApplicationController
+  before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
 
   def index
     @portfolios = Portfolio.all
@@ -14,7 +15,7 @@ class PortfoliosController < ApplicationController
   def create
     @portfolio = Portfolio.new(portfolio_params)
     if @portfolio.save
-      redirect_to portfolios_path, notice: "Successfully created a new Portfolio!"
+      redirect_to portfolios_path, notice: "Successfully created a new portfolio!"
     else
       render new
     end
@@ -25,6 +26,11 @@ class PortfoliosController < ApplicationController
   end
 
   def update
+    if @portfolio.update(portfolio_params)
+      redirect_to portfolios_path, notice: "Successfully updated your portfolio!"
+    else
+      render edit
+    end
 
   end
 
@@ -37,5 +43,9 @@ class PortfoliosController < ApplicationController
 
   def portfolio_params
     params.require(:portfolio).permit(:title, :subtitle,:body)
+  end
+
+  def set_portfolio
+    @portfolio = Portfolio.find(params[:id])
   end
 end
