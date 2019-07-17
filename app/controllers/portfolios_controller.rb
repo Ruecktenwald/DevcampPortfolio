@@ -35,7 +35,11 @@ class PortfoliosController < ApplicationController
   end
 
   def destroy
-
+    if @portfolio.destroy
+      redirect_to portfolios_url, notice: "Successfully deleted your portfolio!"
+    else
+      render portfolio_path(@portfolio)
+    end
   end
 
 
