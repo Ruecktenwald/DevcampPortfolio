@@ -7,6 +7,6 @@ class Skill < ApplicationRecord
   private
 
   def set_defaults
-    self.badge ||= Placeholder.image_generator(heaight: 250, width: 250)
+    self.badge ||= Placeholder.image_generator(height: 250, width: 250)
   end
 end
