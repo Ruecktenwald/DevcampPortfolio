@@ -19,7 +19,11 @@
     <%= link_to "Login", user_session_path %>
     <% end %>
 
-
     <%= yield %>
   </body>
 </html>
+
+<hr>
+<% if session[:source] %>
+Thanks for visiting me from <%= session[:source]  %>
+<% end %>
